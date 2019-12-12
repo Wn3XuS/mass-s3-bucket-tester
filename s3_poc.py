@@ -50,18 +50,18 @@ def check_upload (bucket,url,region):
 		)
 
 		bucket = conn.get_bucket(bucket)
-		key_name = 'poc.txt'
+		key_name = 'upload.txt'
 		path = '/' #Directory Under which file should get upload
 		full_key_name = os.path.join(path, key_name)
 		k = bucket.new_key(full_key_name)
 		k.set_contents_from_filename(key_name)
-		hello_key = bucket.get_key('poc.txt')
+		hello_key = bucket.get_key('upload.txt')
 		hello_key.set_canned_acl('public-read')
 		write_uploadable (url)
 
 	except Exception,e:
 		#print str(e)
-		print (Fore.RED +"[*] No POC Uploaded... Access Denied [*]")
+		print (Fore.RED +"[*] No File Uploaded... Access Denied [*]")
 		pass
 
 def write_listable (url):
@@ -73,9 +73,9 @@ def write_listable (url):
 
 def write_uploadable (url):
 	text_file = open("buckets-upload.txt", "a")
-	text_file.write("[*] POC uploaded: http://"+url+"/poc.txt [*]\n")
+	text_file.write("[*] File uploaded: http://"+url+"/upload.txt [*]\n")
 	text_file.close()
-	print (Fore.GREEN + "[*] POC Uploaded! [*]")
+	print (Fore.GREEN + "[*] File Uploaded! [*]")
 
 
 
